@@ -40,3 +40,19 @@ function InvalidAccessConstructorException() {
 }
 InvalidAccessConstructorException.prototype = new BaseException(); 
 InvalidAccessConstructorException.prototype.constructor = InvalidAccessConstructorException;
+
+//Excepción acceso inválido a constructor
+function UninstantiatedObjectException(param) {
+	this.name = "UninstantiatedObjectException";
+	this.message = "You can't instantiate a " + param + " object";
+}
+UninstantiatedObjectException.prototype = new BaseException(); 
+UninstantiatedObjectException.prototype.constructor = UninstantiatedObjectException;
+
+//Excepción intento de instacia clase abstracta
+function AbstractClassException(classValue) {
+	this.name = "AbstractClassException";
+	this.message = classValue + " is a abstract class.";
+}
+AbstractClassException.prototype = new BaseException(); 
+AbstractClassException.prototype.constructor = AbstractClassException;
