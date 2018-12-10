@@ -1,15 +1,16 @@
+"use strict";
 /*Creando los constructores */
 
 //Constructos de persona.
-function Person(name, lastname1, lastname2, born, picture) {
+function Person(name, lastname1, born,  lastname2 = null, picture =null) {
 	
 	if (!(this instanceof Person)) 
 		throw new InvalidAccessConstructorException();
 
 	var _name = name;
-  var _lastname1 = lastname1;
-  var _lastname2 = lastname2;
-  var _born = born;
+  	var _lastname1 = lastname1;
+  	var _lastname2 = lastname2;
+  	var _born = born;
 	var _picture = picture;
 	
 	if (_name === 'undefined' || _name === '') throw new EmptyValueException("_name");
@@ -68,12 +69,12 @@ function Person(name, lastname1, lastname2, born, picture) {
 Person.prototype = {};
 Person.prototype.constructor = Person;
 Person.prototype.toString = function (){	
-	return "Nombre: " + this._name + "Apellido1: " + this._lastname1 + "Apellido2: " + this._lastname2 + 
-					"Nacimiento: " + this._born + "Imagen: " + this._picture; 
+	return "Nombre: " + this.name + " Apellido1: " + this.lastname1 + " Apellido2: " + this.lastname2 + 
+					" Nacimiento: " + this.born + " Imagen: " + this.picture; 
 		}
 
 //Constructor de categoria.
-function Category(name, description) {
+function Category(name, description = null) {
 
 	if (!(this instanceof Category)) 
 		throw new InvalidAccessConstructorException();
@@ -106,11 +107,11 @@ function Category(name, description) {
 Category.prototype = {};
 Category.prototype.constructor = Category;
 Category.prototype.toString = function (){	
-	return "Nombre: " + this._name + "Descripcion: " + this._description; 
+	return "Nombre: " + this.name + " Descripcion: " + this.description; 
 		}
 
 //Constructor de resource.
-function Resource(duration, link, audios, subtitles) {
+function Resource(duration, link, audios = null, subtitles = null) {
 
 	if (!(this instanceof Resource)) 
 	throw new InvalidAccessConstructorException();
@@ -118,7 +119,7 @@ function Resource(duration, link, audios, subtitles) {
   var _duration = duration;
   var _link = link;
   var _audios = [audios];
-	var _subtitles = [subtitles]
+	var _subtitles = [subtitles];
 		
 	if (_duration === 'undefined' || _duration === '') throw new EmptyValueException("_duration");
 	if (_link === 'undefined' || _link === '') throw new EmptyValueException("_link");
@@ -165,12 +166,12 @@ function Resource(duration, link, audios, subtitles) {
 Resource.prototype = {};
 Resource.prototype.constructor = Resource;
 Resource.prototype.toString = function (){	
-	return "Duracion: " + this._duration + "Link: " + this._link + "Audios: " + 
-				this._audios + "Subtitulos: " + this._subtitles; 
+	return "Duracion: " + this.duration + " Link: " + this.link + " Audios: " + 
+				this.audios + " Subtitulos: " + this.subtitles; 
 }
 
 //Constructor de production.
-function Production(title, nationality, publication, synopsis, image) {
+function Production(title, publication, nationality = null , synopsis = null , image = null) {
 
 	if (!(this instanceof Production)) 
 	throw new InvalidAccessConstructorException();
@@ -180,8 +181,8 @@ function Production(title, nationality, publication, synopsis, image) {
 	}
 
 	var _title = title;
-	var _nationality = nationality;
 	var _publication = publication;
+	var _nationality = nationality;
 	var _synopsis = synopsis;
 	var _image = image;
 	
@@ -240,19 +241,19 @@ Object.defineProperty(this, 'nationality', {
 Production.prototype = {};
 Production.prototype.constructor = Production;
 Production.prototype.toString = function (){	
-	return "Titulo: " + this._title + "Nacionalidad: " + this._nacionality + "Publicacion: " + 
-				this._publication + "Synopsis: " + this._synopsis + "Imagen: " + this._image; 
+	return "Titulo: " + this.title + " Nacionalidad: " + this.nationality + " Publicacion: " + 
+				this.publication + " Synopsis: " + this.synopsis + " Imagen: " + this.image; 
 }
 
 //Constructor de pelicula
-function Movie(resource, locations) {
+function Movie(title, publication, nationality = null, synopsis = null, image = null, resource = null, locations =null) {
 
-	Production.call(this);
+	Production.call(this, title, publication, nationality, synopsis, image, resource, locations);
 
-  var _resource = resource;
-  var _locations = [locations];
+  	var _resource = resource;
+  	var _locations = [locations];
 
-  Object.defineProperty(this, 'resource', {
+  	Object.defineProperty(this, 'resource', {
 		get:function(){
 			return _resource;
 		},
@@ -274,17 +275,19 @@ function Movie(resource, locations) {
 Movie.prototype = Object.create(Production.prototype);
 Movie.prototype.constructor = Movie;
 Movie.prototype.toString = function (){	
-	return "Recurso: " + this._resource + "Localizacion/es: " + this._locations; 
+	return "Titulo: " + this.title + " Publicacion: " + this.publication + " Nacionalidad: " + 
+	this.nationality + " Synopsis: " + this.synopsis + " Imagen: " + this.image + 
+	" Recurso: " + this.resource + " Localizacion/es: " + this.locations; 
 }
 
 //Constructor de serie.
-function Serie(seasons) {
+function Serie(title, publication, nationality = null, synopsis = null, image = null, seasons = null) {
 
-	Production.call(this);
+	Production.call(this, title, publication, nationality, synopsis, image, seasons);
 
-  var _seasons = [seasons];
+  	var _seasons = [seasons];
 
-  Object.defineProperty(this, '_seasons', {
+  	Object.defineProperty(this, '_seasons', {
 		get:function(){
 			return _seasons;
 		},
@@ -297,16 +300,18 @@ function Serie(seasons) {
 Serie.prototype = Object.create(Production.prototype);
 Serie.prototype.constructor = Serie;
 Serie.prototype.toString = function (){	
-	return "Seasons: " + this._seasons; 
+	return "Titulo: " + this.title + " Publicacion: " + this.publication + " Nacionalidad: " + 
+	this.nationality + " Synopsis: " + this.synopsis + " Imagen: " + this.image + 
+	" seasons: " + this.seasons; 
 }
 
 //Constructor de Season.
-function Season(title, episodes) {
+function Season(title, episodes = null) {
 
 	if (!(this instanceof Season)) 
 		throw new InvalidAccessConstructorException();
 
-  var _title = title;
+	var _title = title;
 	var _episodes = [episodes];
 	
 	if (_title === 'undefined' || _title === '') throw new EmptyValueException("_title");
@@ -333,8 +338,8 @@ function Season(title, episodes) {
 }
 Season.prototype = {};
 Season.prototype.constructor = Season;
-Movie.prototype.toString = function (){	
-	return "Titulo: " + this._title + "Episodios: " + this._episodes; 
+Season.prototype.toString = function (){	
+	return "Titulo: " + this.title + " Episodios: " + this.episodes; 
 }
 
 //Constructor de User.
@@ -343,7 +348,7 @@ function User(username, email, password) {
 	if (!(this instanceof User)) 
 		throw new InvalidAccessConstructorException();
 
-  var _username = username;
+  	var _username = username;
 	var _email = email;
 	var _password = password;
 	
@@ -385,13 +390,13 @@ function User(username, email, password) {
 User.prototype = {};
 User.prototype.constructor = User;
 User.prototype.toString = function (){	
-	return "Nombre de usuario: " + this._username + "Email: " + this._email + "Contraseña: " + this._password; 
+	return "Nombre de usuario: " + this.username + " Email: " + this.email + " Contraseña: " + this.password; 
 }
 
 //Constructor de coordenadas
-function Cordinate(latitude, longitude) {
+function Coordinate(latitude, longitude) {
 
-	if (!(this instanceof Cordinate)) 
+	if (!(this instanceof Coordinate)) 
 		throw new InvalidAccessConstructorException();
 
   var _latitude = latitude;
@@ -424,5 +429,5 @@ function Cordinate(latitude, longitude) {
 Coordinate.prototype = {};
 Coordinate.prototype.constructor = Coordinate;
 Coordinate.prototype.toString = function (){	
-	return "Latitud: " + this._latitude + "Longitud: " + this._longitude; 
+	return "Latitud: " + this.latitude + "Longitud: " + this.longitude; 
 }
