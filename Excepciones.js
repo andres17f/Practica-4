@@ -56,3 +56,109 @@ function AbstractClassException(classValue) {
 }
 AbstractClassException.prototype = new BaseException(); 
 AbstractClassException.prototype.constructor = AbstractClassException;
+
+//Excepciones escritas por mi. control del system.
+
+//Excepcion nulo invalido
+function NullInvalidException(classValue) {
+	this.name = "NullInvalidException";
+	this.message = classValue + " Value null is invalid.";
+}
+NullInvalidException.prototype = new BaseException(); 
+NullInvalidException.prototype.constructor = NullInvalidException;
+
+//Excepcion categoria existente
+function CategoryExistException(classValue) {
+	this.name = "CategoryExistException";
+	this.message = classValue + " Category already exist.";
+}
+CategoryExistException.prototype = new BaseException(); 
+CategoryExistException.prototype.constructor = CategoryExistException;
+
+//Excepcion de parametro invalido.
+function InvalidParamException(classValue) {
+	this.name = "InvalidParamException";
+	this.message = classValue + "param invalid.";
+}
+InvalidParamException.prototype = new BaseException();
+InvalidParamException.prototype.constructor = InvalidParamException;
+
+//Excepcion categoria no existente
+function CategoryNotExistException(classValue) {
+	this.name = "CategoryNotExistException";
+	this.message = classValue + " Category not exist.";
+}
+CategoryNotExistException.prototype = new BaseException(); 
+CategoryNotExistException.prototype.constructor = CategoryNotExistException;
+
+//Excepcion nombre de usuario existente
+function UsernameExistException(classValue) {
+	this.name = "UsernameExistException";
+	this.message = classValue + " Username already exist.";
+}
+UsernameExistException.prototype = new BaseException(); 
+UsernameExistException.prototype.constructor = UsernameExistException;
+
+//Excepcion nombre de usuario no existente
+function UsernameNotExistException(classValue) {
+	this.name = "UsernameNotExistException";
+	this.message = classValue + " Username not exist.";
+}
+UsernameNotExistException.prototype = new BaseException(); 
+UsernameNotExistException.prototype.constructor = CategoryNotExistException;
+
+//Excepcion email existente
+function EmailExistException(classValue) {
+	this.name = "EmailExistException";
+	this.message = classValue + " Email already exist.";
+}
+EmailExistException.prototype = new BaseException(); 
+EmailExistException.prototype.constructor = EmailExistException;
+
+//Excepcion produccion existente
+function ProductionExistException(classValue) {
+	this.name = "ProductionExistException";
+	this.message = classValue + " Production already exist.";
+}
+ProductionExistException.prototype = new BaseException(); 
+ProductionExistException.prototype.constructor = ProductionExistException;
+
+//Excepcion produccion no existente
+function ProductionNotExistException(classValue) {
+	this.name = "ProductionNotExistException";
+	this.message = classValue + " Production not exist.";
+}
+ProductionNotExistException.prototype = new BaseException(); 
+ProductionNotExistException.prototype.constructor = ProductionNotExistException;
+
+//Excepcion actor existente
+function ActorExistException(classValue) {
+	this.name = "ActorExistException";
+	this.message = classValue + " Actor already exist.";
+}
+ActorExistException.prototype = new BaseException(); 
+ActorExistException.prototype.constructor = ActorExistException;
+
+//Excepcion actor no existente
+function ActorNotExistException(classValue) {
+	this.name = "ActorNotExistException";
+	this.message = classValue + " Actor not exist.";
+}
+ActorNotExistException.prototype = new BaseException(); 
+ActorNotExistException.prototype.constructor = ActorNotExistException;
+
+//Excepcion director existente
+function DirectorExistException(classValue) {
+	this.name = "DirectorExistException";
+	this.message = classValue + " Director already exist.";
+}
+DirectorExistException.prototype = new BaseException(); 
+DirectorExistException.prototype.constructor = DirectorExistException;
+
+//Excepcion director no existente
+function DirectorNotExistException(classValue) {
+	this.name = "DirectorNotExistException";
+	this.message = classValue + " Director not exist.";
+}
+DirectorNotExistException.prototype = new BaseException(); 
+DirectorNotExistException.prototype.constructor = DirectorNotExistException;
