@@ -162,3 +162,19 @@ function DirectorNotExistException(classValue) {
 }
 DirectorNotExistException.prototype = new BaseException(); 
 DirectorNotExistException.prototype.constructor = DirectorNotExistException;
+
+//Excepcion de produccion no asignada
+function ProductionNotAssignException(classValue) {
+	this.name = "ProductionNotAssginException";
+	this.message = classValue + " Producction not asign.";
+}
+ProductionNotAssignException.prototype = new BaseException(); 
+ProductionNotAssignException.prototype.constructor = ProductionNotAssignException;
+
+//Excepcion de categoria no asignada
+function CategoryNotAssignException(classValue) {
+	this.name = "CategoryNotAssginException";
+	this.message = classValue + " Category not asign.";
+}
+CategoryNotAssignException.prototype = new BaseException(); 
+CategoryNotAssignException.prototype.constructor = CategoryNotAssignException;

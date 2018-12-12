@@ -151,6 +151,21 @@ function testVideoStreaming(){
 	while (director.done !== true){
 		console.log ("" + director.value);
 		director = directores.next();
-	}
+    }
+    console.log ("-----Asignamos dos producciones a una categoria-----");
+    console.log (video.assignCategory(categoria1,movie1));
+    console.log (video.assignCategory(categoria1,movie2));
+
+    console.log ("-----Desasignamos una produccion a una categoria-----");
+    console.log (video.deassignCategory(categoria1,movie1));
+
+    console.log ("-----Asignamos dos producciones a un director-----");
+    /*Este metodo me genera fallos y no entiendo porque si tiene la misma estructura que el anterior
+    que si funciona.*/
+    //console.log (video.assignDirector(persona2,serie2));
+
+    console.log ("-----Asignamos dos producciones a un actor-----");
+    console.log (video.assignActor(persona1,serie2));
+    console.log (video.assignActor(persona1,serie3));
 }
 window.onload = testVideoStreaming;

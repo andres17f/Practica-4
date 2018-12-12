@@ -70,8 +70,7 @@ var VideoSystem = (function () {
                 
 				var search = this.indexOfCategory(category); 	
 				if (search === -1){
-					_categories.push({category: category,productions: []}
-					);
+					_categories.push({category: category, productions: []});
 				} else{
 					throw new CategoryExistException("category");
 				}
@@ -353,6 +352,167 @@ var VideoSystem = (function () {
 				}
 				return _directors.length;
 			};
+
+			//Metodo que asigna una produccion a una categoria.
+			this.assignCategory = function(category, production){
+
+				if (category === null) {
+					throw new NullInvalidException("category");
+				}
+				if (production === null) {
+					throw new NullInvalidException("production");
+				}
+
+				if (!(category instanceof Category)) { 
+					throw new InvalidParamException("category");;
+				}
+
+				if (!(production instanceof Production)) { 
+					throw new InvalidParamException("production");;
+				}
+				
+				var searchCategory = this.indexOfCategory(category); 
+				var searchProduction = this.indexOfProduction(production);
+
+				if ( searchCategory !== -1 ) {
+					if (searchProduction !== -1) {
+						_categories[searchCategory].productions.push(production);
+					} else {
+						_productions.push (production);
+						_categories[searchCategory].productions.push(production);
+					}
+				}	else {
+					_categories.push({category: category, productions: []});
+					if (searchProduction !== -1) {
+						_categories[searchCategory].productions.push(production);
+					} else {
+						_productions.push (production);
+						_categories[searchCategory].productions.push(production);
+					}
+				}
+				return _categories[searchCategory].productions.length;
+			}
+
+			//Busca la posicion de una produccion en el array dentro de categorias.
+			this.indexOfProductionCategory = function(production, posproduction){
+				function compareElements(element) {
+					return (element.title === production.title)
+				}
+				return posproduction.findIndex(compareElements);		
+			}
+
+			//Metodo que desasigna una produccion a una categoria.
+			this.deassignCategory = function(category, production){
+
+				if (category === null) {
+					throw new NullInvalidException("category");
+				}
+				if (production === null) {
+					throw new NullInvalidException("production");
+				}
+
+				if (!(category instanceof Category)) { 
+					throw new InvalidParamException("category");;
+				}
+
+				if (!(production instanceof Production)) { 
+					throw new InvalidParamException("production");;
+				}
+				
+				var searchCategory = this.indexOfCategory(category); 
+				var searchProduction = this.indexOfProductionCategory(production, _categories[searchCategory].productions);
+
+				if ( searchCategory !== -1 ) {
+					if (searchProduction !== -1) {
+						_categories[searchCategory].productions.splice(searchProduction,1);
+					} else {
+						throw new ProductionNotAssignException();
+					}
+				}	else {
+						throw new CategoryNotAssignException();
+				}
+				return _categories[searchCategory].productions.length;
+			}
+
+			//Metodo que asigna una produccion a un director.
+			this.assignDirector = function(person, production){
+				
+				if (person === null) {
+					throw new NullInvalidException("person");
+				}
+				if (production === null) {
+					throw new NullInvalidException("production");
+				}
+
+				if (!(person instanceof Person)) { 
+					throw new InvalidParamException("person");;
+				}
+
+				if (!(production instanceof Production)) { 
+					throw new InvalidParamException("production");;
+				}
+				
+				var searchDirector = this.indexOfDirector(person); 
+				var searchProduction = this.indexOfProduction(production);
+
+				if ( searchDirector !== -1 ) {
+					if (searchProduction !== -1) {
+						_directors[searchDirector].productions.push(production);
+					} else {
+						_productions.push (production);
+						_directors[searchDirector].productions.push(production);
+					}
+				}	else {
+					_directors.push({director: person, productions: []});
+					if (searchProduction !== -1) {
+						_directors[searchDirector].productions.push(production);
+					} else {
+						_productions.push(production);
+						_directors[searchDirector].productions.push(production);
+					}
+				}
+				return _directors[searchDirector].productions.length;
+			}
+
+			//Metodo que asigna una produccion a un actor.
+			this.assignActor = function(person, production, character, main){
+
+				if (person === null) {
+					throw new NullInvalidException("person");
+				}
+				if (production === null) {
+					throw new NullInvalidException("production");
+				}
+
+				if (!(person instanceof Person)) { 
+					throw new InvalidParamException("person");;
+				}
+
+				if (!(production instanceof Production)) { 
+					throw new InvalidParamException("production");;
+				}
+				
+				var searchActor = this.indexOfActor(person); 
+				var searchProduction = this.indexOfProduction(production);
+
+				if ( searchActor !== -1 ) {
+					if (searchProduction !== -1) {
+						_actors[searchActor].productions.push({production: production, character: character, main: main});
+					} else {
+						_productions.push (production);
+						_actors[searchActor].productions.push({production: production, character: character, main: main});
+					}
+				}	else {
+					_actors.push({ Actor: person, productions: []});
+					if (searchProduction !== -1) {
+						_actors[searchActor].productions.push({production: production, character: character, main: main});
+					} else {
+						_productions.push (production);
+						_actors[searchActor].productions.push({production: production, character: character, main: main});
+					}
+				}
+				return _actors[searchActor].productions.length;
+			}
 
 		}
 		VideoSystem.prototype = {}; 
